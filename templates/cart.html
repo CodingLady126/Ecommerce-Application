@@ -1,0 +1,83 @@
+{% extends 'common/l3.html' %}
+{% load static %}
+
+{% block content %}
+<div class="col-12" style="margin-bottom:150px; ">
+    <!-- Main Content -->
+    {% if data %}
+    <div class="row">
+        <div class="col-12 mt-3 text-center text-uppercase">
+            <h2>Your Cart</h2>
+        </div>
+    </div>
+    <main class="row">
+        <div class="col-12 bg-white py-3 mb-3">
+            <div class="row">
+                <div class="col-lg-6 col-md-8 col-sm-10 mx-auto table-responsive">
+                    <form class="row">
+                        <div class="col-12">
+                            <table class="table table-striped table-hover table-sm">
+                                <thead>
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Price</th>
+                                    <th>Qty</th>
+                                    <th>Amount</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for product,qty in data.items %}
+                                <tr style="font-family:Times New Roman, Times, serif">
+                                    <td>
+                                        <a style="text-decoration:none;color:black" href="/product/{{product.id}}">
+                                        <img src="{{ product.photo.url}}" class="img-fluid" style="margin-right:10px">
+                                        {{product.name}}
+                                        </a>
+                                    </td>
+                                    <td>
+                                        {{product.price}} lei
+                                    </td>
+                                    <td>
+                                        {{qty.0}}
+                                    </td>
+                                    <td>
+                                        {{qty.1}} lei
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <th colspan="3" class="text-right">Total</th>
+                                    <th>{{total}} lei</th>
+                                    <th></th>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                        <div class="col-12 text-right">
+                            <button class="btn btn-secondary mr-3" type="submit"><a style="text-decoration:none;color:white" href="{% url 'home' %}">Countine Shoping</a></button>
+                            <a href="/check_out" class="btn btn-outline-success">Checkout</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </main>
+    <!-- Main Content -->
+    {% else %}
+    <div class="jumbotron jumbotron-fluid">
+                        <div class="container" style="text-align:center;margin-top:30px;margin-bottom:140px">
+                            <h1 class="display-4">There aren't any items in the cart</h1>
+                            <p class="lead">Add items to the cart</p>
+                            <a href="/">
+                            <button type="button" class="btn btn-dark">Countinue shoping</button>
+                            </a>
+                        </div>
+     </div>
+    {% endif %}
+</div>
+
+{% endblock content %}

@@ -1,0 +1,53 @@
+{% extends 'common/l3.html' %}
+{% load static %}
+
+{% block content %}
+
+<style>
+.container {
+  width: 100%;
+  margin: 100px auto 30px;
+  background-color: #fff;
+  padding: 0 20px 20px;
+  border-radius: 6px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  box-shadow: 0 2px 5px #a8a5a5;
+  -webkit-box-shadow: 0 2px 5px #a8a5a5;
+  -moz-box-shadow: 0 2px 5px #a8a5a5;
+  text-align: center;
+}
+.avatar-flip img {
+  border-radius: 100px;
+  overflow: hidden;
+  height: 10em;
+  width: 10em;
+  position: relative;
+  margin: auto;
+  top: -50px;
+  box-shadow: 0 0 0 13px #f0f0f0;
+  -webkit-box-shadow: 0 0 0 13px #f0f0f0;
+  -moz-box-shadow: 0 0 0 13px #f0f0f0;
+}
+
+@media only screen and (min-width: 600px) {
+  .container{width:30%}
+}
+</style>
+
+<div class="container">
+  <div class="avatar-flip">
+    <img src="{{ user_profile.photo.url }}" height="150" width="150">
+  </div>
+  <h2><b>{{user_profile.name}}</b></h2>
+  <h4><b>({{user.username}})</b></h4>
+    <b>Email: {{user_profile.email}}</b><br>
+    <b>Address: {{user_profile.address}}</b><br>
+    <b>Contact: {{user_profile.phone}}</b><br><br>
+  <a href="/logout">
+    <button type="submit" class="btn btn-dark">
+    <b style="padding:1.5em;font-size:18px">Log Out</b>
+    </button>  
+  </a>
+</div>
+{% endblock content %}

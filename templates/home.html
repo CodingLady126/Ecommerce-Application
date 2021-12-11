@@ -1,0 +1,125 @@
+{% extends 'common/l3.html' %}
+{% load static %}
+
+{% block content %}
+
+
+
+<main class="row">
+    <!-- Slider -->
+    {% include 'common/slider.html' %}
+    <!-- Slider -->
+
+    <!-- Latest Products -->
+    <div class="col-12">
+        <div class="row justify-content-center justify-content-sm-center">
+            <div class="col-10 py-3">
+                 <!-- Product -->
+                {% if products_latest %}
+                <div class="row">
+                    <div class="col-12 text-center text-uppercase">
+                        <span class="detail-price" style="font-size:24px;font-weight:bold   ">
+                            Latest Products
+                        </span>
+                    </div>
+                </div>
+                <div class="row ">
+                    {% for product in products_latest %}
+                        <div class="col-lg-3 col-sm-6 my-3">
+                            <div class="col-12 bg-white text-center h-100 product-item">
+                                <div class="row h-100">
+                                    <div class="col-12  mb-0">
+                                        <a href="{% url 'product_details' product.id %}">
+                                            <img src="{{ product.photo.url }}" class="img-fluid" width="170px">       
+                                        </a>
+                                    </div>
+                                    <div class="col-12 mb-0">
+                                       <a href="{% url 'product_details' product.id %}" class="product-name"> {{ product.name }}</a>
+                                    </div>
+                                    <div class="col-12 mb-0">
+                                        <span class="product-price">
+                                            {{ product.price }} lei 
+                                        </span>
+                                    </div>
+                                    <div class="col-12 mb-3 align-self-end">
+                                        <a href="{% url 'add_to_cart' product.id%}?next=home">
+                                            <button class="btn btn-outline-dark" type="button"><i class="fas fa-cart-plus mr-2"></i>Add to cart</button>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="jumbotron jumbotron-fluid">
+                        <div class="container" style="text-align:center">
+                            <h1 class="display-4">Sorry, no item avilable in the stock</h1>
+                            <p class="lead">We will add the items soon</p>
+                        </div>
+                    </div>
+                {% endif %}
+                <!-- Product -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Featured Products -->
+
+
+    <!--Banner-->
+    {% include 'common/banner.html' %}
+    <!---->
+    
+    <!-- Category Products -->
+    {%for category, products in products_cats.items %}
+    {% if products %}
+    <div class="col-12">
+        <div class="row justify-content-center justify-content-sm-center">
+            <div class="col-10 py-3">
+                 <!-- Product -->
+                <div class="row">
+                    <div class="col-12 text-center text-uppercase">
+                        <span class="detail-price" style="font-size:26px;font-weight:bold;">
+                          <a style="text-decoration: underline;color:#7a7d7a" href="{% url 'category_list' category %}">  {{category}} </a>
+                        </span>
+                    </div>
+                </div>
+                <div class="row ">
+                    {% for product in products%}
+                        <div class="col-lg-3 col-sm-6 my-3">
+                            <div class="col-12 bg-white text-center h-100 product-item">
+                                <div class="row h-100">
+                                    <div class="col-12  mb-0">
+                                        <a href="{% url 'product_details' product.id %}">
+                                            <img src="{{ product.photo.url }}" class="img-fluid" width="170px">       
+                                        </a>
+                                    </div>
+                                    <div class="col-12 mb-0">
+                                       <a href="{% url 'product_details' product.id %}" class="product-name"> {{ product.name }}</a>
+                                    </div>
+                                    <div class="col-12 mb-0">
+                                        <span class="product-price">
+                                            {{ product.price }} lei 
+                                        </span>
+                                    </div>
+                                    <div class="col-12 mb-3 align-self-end">
+                                        <a href="{% url 'add_to_cart' product.id%}?next=home">
+                                            <button class="btn btn-outline-dark" type="button"><i class="fas fa-cart-plus mr-2"></i>Add to cart</button>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                <!-- Product -->
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    {%endfor%}
+    <!-- Featured Products -->
+
+</main>
+
+{% endblock content %}

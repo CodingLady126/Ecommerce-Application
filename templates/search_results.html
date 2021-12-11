@@ -1,0 +1,70 @@
+{% extends 'common/l3.html' %}
+{% load static %}
+
+{% block content %}
+
+
+
+<main class="row">
+    
+<!-- Featured Products -->
+    <div class="col-12">
+        <div class="row justify-content-center justify-content-sm-center">
+            <div class="col-10 py-3">
+                {% if products %}
+                 <!-- Product -->
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <h2>Search results for <u>{{query}}</u>, <b>{{num_result}}</b> item{{ num_result|pluralize:"s" }} found</h2>
+                    </div>
+                </div>
+                <div class="row ">
+                    {% for product in products %}
+                        <div class="col-lg-3 col-sm-6 my-3">
+                            <div class="col-12 bg-white text-center h-100 product-item">
+                                <div class="row h-100">
+                                    <div class="col-12  mb-0">
+                                        <a href="{% url 'product_details' product.id %}">
+                                            <img src="{{ product.photo.url }}" class="img-fluid" width="170px">       
+                                        </a>
+                                    </div>
+                                    <div class="col-12 mb-0">
+                                       <a href="{% url 'product_details' product.id %}" class="product-name"> {{ product.name }}</a>
+                                    </div>
+                                    <div class="col-12 mb-0">
+                                        <span class="product-price">
+                                            ${{ product.price }}
+                                        </span>
+                                    </div>
+                                    <div class="col-12 mb-3 align-self-end">
+                                        <a href="{% url 'add_to_cart' product.id%}?next={{current_url}}">
+                                            <button class="btn btn-outline-dark" type="button"><i class="fas fa-cart-plus mr-2"></i>Add to cart</button>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                <!-- Product -->
+                 {% else %}
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container" style="text-align:center">
+                <h1 class="">No item named <b>{{query}}</b> found in the stock</h1>
+                <p class="lead">Please, try with another keywords</p>
+            </div>
+        </div>
+    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Featured Products -->
+    
+    
+    
+    <!--Banner-->
+    {% include 'common/banner.html' %}
+    <!---->
+</main>
+
+{% endblock content %}

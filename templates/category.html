@@ -1,0 +1,69 @@
+{% extends 'common/l3.html' %}
+{% load static %}
+
+{% block content %}
+<main class="row">
+    
+<!-- Products category-->
+    <div class="col-12">
+        <div class="row justify-content-center justify-content-sm-center">
+            <div class="col-10 py-3">
+                 <!-- Product -->
+                {% if products %}
+                <div class="row">
+                    <div class="col-12 text-center">
+                    <span class="detail-price" style="font-size:20px;color:#7a7d7a;padding:1em">
+                        <h2><b>{{category_name}}</b></h2>
+                    </span>
+                        
+                    </div>
+                </div>
+                <div class="row ">
+                    {% for product in products %}
+                        <div class="col-lg-3 col-sm-6 my-3">
+                            <div class="col-12 bg-white text-center h-100 product-item">
+                                <div class="row h-100">
+                                    <div class="col-12  mb-0">
+                                        <a href="{% url 'product_details' product.id %}">
+                                            <img src="{{ product.photo.url }}" class="img-fluid" width="170px">       
+                                        </a>
+                                    </div>
+                                    <div class="col-12 mb-0">
+                                       <a href="{% url 'product_details' product.id %}" class="product-name"> {{ product.name }}</a>
+                                    </div>
+                                    <div class="col-12 mb-0">
+                                        <span class="product-price">
+                                            ${{ product.price }}
+                                        </span>
+                                    </div>
+                                    <div class="col-12 mb-3 align-self-end">
+                                        <a href="{% url 'add_to_cart' product.id%}?next={{current_url}}">
+                                            <button class="btn btn-outline-dark" type="button"><i class="fas fa-cart-plus mr-2"></i>Add to cart</button>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="jumbotron jumbotron-fluid">
+                        <div class="container" style="text-align:center">
+                            <h1 class="">No items found in the category</h1>
+                            <p class="lead">Visit again, we will add them soon</p>
+                        </div>
+                    </div>
+                {% endif %}
+                <!-- Product -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Featured Products -->
+
+    
+    <!--Banner-->
+    {% include 'common/banner.html' %}
+    <!---->
+</main>
+
+{% endblock content %}
